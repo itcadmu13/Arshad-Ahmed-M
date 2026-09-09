@@ -1,0 +1,113 @@
+Prompt Structure-1
+'''
+Prompt Log
+
+
+BAD_PROMPT = (
+    "You're a support triage bot. Categories: Billing (payment, charges, "
+    "refunds, invoices, subscription cost), Technical (bugs, crashes, "
+    "errors, features not working), General (anything else). Give the "
+    "category, a confidence score 0-1, and a one-sentence reason. Here's "
+    "the message: \"I was charged twice for my subscription this month.\""
+)
+
+''''''
+
+OUtput
+=== BAD PROMPT ===
+**Category:** Billing  
+**Confidence:** 0.99  
+**Reason:** The customer reports a duplicate subscription charge.
+=== STRUCTURED PROMPT ===
+Billing | Confidence: 1.0 | Reason: The customer reports being charged twice for their subscription this month.
+=== COMPARISON ===
+Bad prompt output:
+**Category:** Billing  
+**Confidence:** 0.99  
+**Reason:** The customer reports a duplicate subscription charge.
+
+
+2 Few Shot Example
+
+Prompt log
+'''''''
+### 1. Zero-shot — 3 runs
+
+**Developer prompt:** `STANDING_INSTRUCTION_ZERO_SHOT`
+**User prompt:**
+
+> I paid for the premium plan but I still can't access the premium features.
+
+### 2. One-shot — 3 runs
+
+**Developer prompt:** `STANDING_INSTRUCTION_ONE_SHOT`
+**User prompt:**
+
+> I paid for the premium plan but I still can't access the premium features.
+
+### 3. Few-shot — 1 run
+
+**Developer prompt:** `STANDING_INSTRUCTION_FEW_SHOT`
+**User prompt:**
+
+> I paid for the premium plan but I still can't access the premium features.
+
+
+
+'''''''
+
+_shot_examples.py 
+Category: Technical  
+Confidence: 0.88  
+Reason: The customer reports that premium features remain inaccessible despitepurchasing the premium plan.
+**Category:** Technical  
+**Confidence:** 0.88  
+**Reason:** The customer completed payment, but the premium features are not accessible as expected.
+Category: Technical  
+Confidence: 0.86  
+Reason: The customer reports that premium features remain inaccessible despitehaving paid for the plan.
+Category: Technical  
+Confidence: 0.84  
+Reason: Premium features remain inaccessible despite successful payment, indicating an access or activation failure.
+Category: Technical  
+Confidence: 0.90  
+Reason: The premium features remain inaccessible despite payment, indicating the product is not working as expected.
+Category: Technical  
+Confidence: 0.84  
+Reason: The premium features remain inaccessible despite payment, indicating afeature-access or entitlement issue.
+Category: Technical  
+Confidence: 0.93  
+Reason: The payment succeeded, but the premium features were not enabled, indicating an access or activation fault.
+
+=== SIDE-BY-SIDE COMPARISON ===
+Message: I paid for the premium plan but I still can't access the premium features.
+
+Zero-shot outputs:
+1. Category: Technical  
+Confidence: 0.88  
+Reason: The customer reports that premium features remain inaccessible despitepurchasing the premium plan.
+2. **Category:** Technical  
+**Confidence:** 0.88  
+**Reason:** The customer completed payment, but the premium features are not accessible as expected.
+3. Category: Technical  
+Confidence: 0.86  
+Reason: The customer reports that premium features remain inaccessible despitehaving paid for the plan.
+
+One-shot outputs:
+1. Category: Technical  
+Confidence: 0.84  
+Reason: Premium features remain inaccessible despite successful payment, indicating an access or activation failure.
+2. Category: Technical  
+Confidence: 0.90  
+Reason: The premium features remain inaccessible despite payment, indicating the product is not working as expected.
+3. Category: Technical  
+Confidence: 0.84  
+Reason: The premium features remain inaccessible despite payment, indicating afeature-access or entitlement issue.
+
+Few-shot output:
+Category: Technical  
+Confidence: 0.93  
+Reason: The payment succeeded, but the premium features were not enabled, indicating an access or activation fault.
+
+
+===========================================================
