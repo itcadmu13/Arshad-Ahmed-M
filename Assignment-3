@@ -1,0 +1,172 @@
+# Prompt Structure-1
+
+```python
+"""
+Prompt Log
+"""
+
+BAD_PROMPT = (
+    "You're a customer support triage bot. Categories: Billing (payments, "
+    "charges, refunds, invoices, subscription fees), Technical (bugs, "
+    "crashes, errors, features not working), General (anything else). "
+    "Give the category, a confidence score from 0-1, and a one-sentence "
+    "reason. Here's the message: "
+    "\"My subscription payment was successful, but I still cannot use "
+    "the premium features.\""
+)
+```
+
+## Output
+
+```text
+=== BAD PROMPT ===
+
+**Category:** Technical
+**Confidence:** 0.94
+**Reason:** The customer successfully paid for the subscription but cannot access the premium features.
+
+=== STRUCTURED PROMPT ===
+
+Technical | Confidence: 0.95 | Reason: The payment was successful, but the customer is unable to access the premium features.
+
+=== COMPARISON ===
+
+Bad prompt output:
+
+**Category:** Technical
+**Confidence:** 0.94
+**Reason:** The customer successfully paid for the subscription but cannot access the premium features.
+```
+
+# 2. Few Shot Example
+
+## Prompt Log
+
+### 1. Zero-shot — 3 runs
+
+**Developer prompt:** `STANDING_INSTRUCTION_ZERO_SHOT`
+
+**User prompt:**
+
+> My payment for the premium plan went through, but the premium features are still locked.
+
+### 2. One-shot — 3 runs
+
+**Developer prompt:** `STANDING_INSTRUCTION_ONE_SHOT`
+
+**User prompt:**
+
+> My payment for the premium plan went through, but the premium features are still locked.
+
+### 3. Few-shot — 1 run
+
+**Developer prompt:** `STANDING_INSTRUCTION_FEW_SHOT`
+
+**User prompt:**
+
+> My payment for the premium plan went through, but the premium features are still locked.
+
+## `_shot_examples.py`
+
+```text
+Category: Technical
+Confidence: 0.89
+Reason: The customer completed the payment but is unable to access the premium features.
+
+Category: Technical
+Confidence: 0.91
+Reason: The premium subscription was paid for successfully, but the expected features remain unavailable.
+
+Category: Technical
+Confidence: 0.87
+Reason: The issue concerns access to premium functionality after a successful payment.
+
+Category: Technical
+Confidence: 0.92
+Reason: The customer has completed the purchase but the premium features have not been activated.
+
+Category: Technical
+Confidence: 0.88
+Reason: The payment succeeded, while the subscribed features are still inaccessible.
+
+Category: Technical
+Confidence: 0.94
+Reason: The customer's payment was successful, but the premium entitlement has not been enabled correctly.
+```
+
+# === SIDE-BY-SIDE COMPARISON ===
+
+**Message:**
+My payment for the premium plan went through, but the premium features are still locked.
+
+## Zero-shot outputs:
+
+**1.**
+
+```text
+Category: Technical
+Confidence: 0.89
+Reason: The customer completed the payment but is unable to access the premium features.
+```
+
+**2.**
+
+```text
+Category: Technical
+Confidence: 0.91
+Reason: The premium subscription was paid for successfully, but the expected features remain unavailable.
+```
+
+**3.**
+
+```text
+Category: Technical
+Confidence: 0.87
+Reason: The issue concerns access to premium functionality after a successful payment.
+```
+
+## One-shot outputs:
+
+**1.**
+
+```text
+Category: Technical
+Confidence: 0.92
+Reason: The customer has completed the purchase but the premium features have not been activated.
+```
+
+**2.**
+
+```text
+Category: Technical
+Confidence: 0.88
+Reason: The payment succeeded, while the subscribed features are still inaccessible.
+```
+
+**3.**
+
+```text
+Category: Technical
+Confidence: 0.90
+Reason: The customer paid for the premium service but cannot use the features included in the plan.
+```
+
+## Few-shot output:
+
+```text
+Category: Technical
+Confidence: 0.94
+Reason: The customer's payment was successful, but the premium entitlement has not been enabled correctly.
+```
+
+# Conclusion
+
+The zero-shot approach was able to correctly classify the message based only on the instructions provided in the prompt.
+
+The one-shot approach included an example to demonstrate the expected classification pattern and response format. This provided additional context to the model.
+
+The few-shot approach provided multiple examples of similar classification tasks. These examples gave the model a clearer understanding of the expected classification behavior and reasoning style.
+
+In all three approaches, the message was classified as **Technical** because the payment was successfully completed, but the customer could not access the premium features.
+
+The results demonstrate that examples can help guide the model's behavior and make the expected output pattern clearer. However, few-shot prompting is not necessarily better in every situation because it requires additional prompt tokens, and its effectiveness depends on the quality and relevance of the examples.
