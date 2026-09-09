@@ -1,0 +1,43 @@
+Azure App Service, Azure AD and AWS IAM vs Azure AD RBAC
+1. Deploy a Sample Application to an Azure App Service Deployment Slot
+Steps
+First, I logged in to the Microsoft Azure Portal.
+I searched for and opened App Services.
+I selected Create and started creating a new App Service.
+I selected the required subscription and resource group.
+I provided a suitable name for the web application.
+I selected a supported runtime stack, such as .NET, Node.js, or Python, depending on the sample application.
+I selected an appropriate region.
+I selected a suitable App Service plan.
+After reviewing the settings, I created the App Service.
+Once the App Service was successfully created, I opened it from the App Services list.
+I went to the Deployment slots section.
+I selected Add Slot to create a separate deployment environment.
+I named the slot staging.
+I created the staging slot using the production environment as the base.
+I opened the staging slot and deployed the sample application to it.
+After deployment, I opened the slot URL to check whether the application was running correctly.
+I verified that the sample application was accessible through the staging slot without affecting the production application.
+Finally, I took screenshots of the App Service, deployment slot, and running application.
+2. Register the Application in Azure AD
+Steps
+I opened the Microsoft Entra ID service in the Azure Portal.
+(Azure AD is now called Microsoft Entra ID.)
+From the left-side menu, I selected App registrations.
+I clicked New registration.
+I entered a suitable name for the application, such as Sample-App-Registration.
+I selected the appropriate account type for the application.
+I entered the redirect URI if it was required by the sample application.
+I clicked Register.
+After registration, Azure created an Application (client) ID and a Directory (tenant) ID.
+I noted these IDs because they are used to identify the application when integrating it with Microsoft Entra ID.
+I configured the required authentication settings for the application.
+I verified that the application registration was successfully created.
+Finally, I took a screenshot of the application registration page for the assignment.
+3. AWS IAM vs Azure AD RBAC Comparison
+Steps
+I reviewed the basic purpose of AWS IAM and Azure RBAC.
+I compared how permissions are created and assigned in both cloud platforms.
+I looked at the main differences between AWS IAM policies and Azure role-based access control.
+I compared how users, groups, roles, and resources are managed.
+I summarized the differences in a short comparison note.
