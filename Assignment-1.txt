@@ -1,0 +1,32 @@
+AWS EC2, S3 and IAM Assignment
+1. Launch and Configure an EC2 Instance
+Steps
+First, I logged in to the AWS Management Console and opened the EC2 service.
+I clicked on Launch Instance to create a new EC2 instance.
+I gave the instance a simple name, Assignment-EC2.
+I selected Amazon Linux as the operating system.
+For the instance type, I selected t3.micro, as it is suitable for a basic assignment.
+I created a key pair so that I could securely access the instance if required.
+I created a security group and allowed SSH access through port 22.
+Instead of allowing SSH access from everyone, I selected My IP to restrict access to my own IP address.
+I configured an 8 GB gp3 storage volume and enabled encryption.
+After checking the configuration, I launched the EC2 instance.
+I waited until the instance status changed to Running.
+Finally, I verified that the instance was working correctly and took a screenshot for the assignment.
+2. Create an S3 Bucket with a Lifecycle Policy
+Steps
+I opened the S3 service from the AWS Management Console.
+I clicked Create Bucket and provided a unique name for the bucket.
+I selected the AWS Region required for the assignment.
+I kept Block all public access enabled because the bucket does not need to be publicly accessible.
+I enabled Bucket Versioning so that previous versions of objects can be retained.
+I enabled Server-Side Encryption using SSE-S3 to protect the stored data.
+I created the S3 bucket and opened it.
+I then went to the Management section and selected Create Lifecycle Rule.
+I named the lifecycle rule ArchiveOldFiles.
+I configured the rule to apply to all objects in the bucket.
+I set the first transition to move objects to Standard-IA after 30 days.
+I set another transition to move objects to Glacier after 90 days.
+I configured the objects to be automatically deleted after 365 days.
+I saved and enabled the lifecycle rule.
+Finally, I checked that the lifecycle rule was active and took screenshots of the bucket and lifecycle configuration.
